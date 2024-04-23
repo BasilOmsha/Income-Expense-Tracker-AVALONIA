@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace incomeExpensTrckAVALONIA.Views
 {
-    public partial class MainWindow : Window
+    public partial class ExpensePageView : UserControl
     {
-        public MainWindow()
+        public ExpensePageView()
         {
             InitializeComponent();
         }

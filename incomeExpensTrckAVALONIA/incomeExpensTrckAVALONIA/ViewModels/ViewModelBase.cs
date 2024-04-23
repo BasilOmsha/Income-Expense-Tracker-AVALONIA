@@ -1,7 +1,11 @@
-﻿using ReactiveUI;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using ReactiveUI;
 
 namespace incomeExpensTrckAVALONIA.ViewModels;
 
-public class ViewModelBase : ReactiveObject
+public partial class ViewModelBase : ObservableObject
 {
+    [ObservableProperty]
+    private string _title;
 }
+
