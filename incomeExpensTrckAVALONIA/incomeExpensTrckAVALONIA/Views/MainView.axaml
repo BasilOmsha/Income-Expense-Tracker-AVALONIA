@@ -12,5 +12,24 @@
 		<vm:MainViewModel />
 	</Design.DataContext>
 
-	<TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<!--<UserControl.Styles>
+		<StyleInclude Source="./Styles/ExpensePageStyles.axaml" />
+	</UserControl.Styles>-->
+
+	<DockPanel>
+		<!-- Title Bar -->
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="65" Background="#502bd4">
+			<TextBlock  Text="{Binding Title}"  Margin="10,0,5,0" FontSize="20" VerticalAlignment="Center" Foreground="#fff"/>
+		</StackPanel>
+
+		<!-- Footer Nav -->
+		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="65" Background="#fff"  HorizontalAlignment="Center">
+			<Button Command="{Binding ShowExpensePageCommand}" Content="Expense Page" FontSize="13" Background="#fff" Foreground="#502bd4" Classes="AddExpenseButton" Width="125"   Margin="10,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" />
+			<Button Command="{Binding ShowHomePageCommand}" Content="Main Page" FontSize="13" Background="#fff" Foreground="#502bd4" Classes="AddExpenseButton" Width="125"   Margin="5,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" IsEnabled="True"/>
+			<Button Content="Exp. Location" FontSize="13" Background="#fff" Foreground="#502bd4" Classes="AddExpenseButton" Width="125"   Margin="5,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" />
+		</StackPanel>
+
+		<ContentControl Content="{Binding CurrentViewModel}"/>
+
+	</DockPanel>
 </UserControl>
