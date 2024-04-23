@@ -1,11 +1,12 @@
 using Avalonia.Controls;
 
-namespace incomeExpensTrckAVALONIA.Views;
-
-public partial class MainWindow : Window
+namespace incomeExpensTrckAVALONIA.Views
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
     }
 }
