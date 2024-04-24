@@ -11,12 +11,12 @@ public partial class MainViewModel : ViewModelBase
 
     public ExpenseService expenseService = new();
 
+    [ObservableProperty]
+    bool isVisible;
     public MainViewModel()
     {
-        //CurrentViewModel = new MainPageViewModel();
-        //Title = "Main Page";
-        CurrentViewModel = new ExpensePageViewModel(expenseService);
-        Title = "Expense Page";
+        //ShowHomePage();
+        ShowExpensePage();
     }
 
     [RelayCommand]
@@ -24,12 +24,14 @@ public partial class MainViewModel : ViewModelBase
     {
         CurrentViewModel = new MainPageViewModel();
         Title = "Main Page";
+        IsVisible = false;
     }
 
     [RelayCommand]
     public void ShowExpensePage()
     {
         CurrentViewModel = new ExpensePageViewModel(expenseService);
-        Title = "Expense Page";
+        Title = "Exp. Page";
+        IsVisible = true;
     }
 }
