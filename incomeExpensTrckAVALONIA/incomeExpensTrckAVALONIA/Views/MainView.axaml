@@ -18,14 +18,14 @@
 
 	<DockPanel>
 		<!-- Title Bar -->
-		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="65" Background="#502bd4" >
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="56" Background="#502bd4" >
 			<TextBlock  Text="{Binding Title}" FontWeight="Bold"  Margin="10,0,5,0" FontSize="15" VerticalAlignment="Center" Foreground="#fff"/>
 			<Rectangle Width="220" Height="0"/><!-- This acts as a spacer -->
-			<Button  Content="Add" FontWeight="Bold" FontSize="15" Background="Transparent" Foreground="#fff"  Width="125"   Margin="10,0,5,0" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsVisible="{Binding IsVisible}"/>
+			<Button Command="{Binding NavToAddExpenseCommand}" Content="Add" FontWeight="Bold" FontSize="15" Background="Transparent" Foreground="#fff"  Width="125"   Margin="10,0,5,0" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsVisible="{Binding IsVisible}"/>
 		</StackPanel>
 
 		<!-- Footer Nav -->
-		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="65" Background="#fff"  HorizontalAlignment="Center">
+		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="56" Background="#fff"  HorizontalAlignment="Center">
 			<Button Command="{Binding ShowExpensePageCommand}" Content="Expense Page" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="10,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" />
 			<Button Command="{Binding ShowHomePageCommand}" Content="Main Page" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" IsEnabled="True"/>
 			<Button Content="Exp. Location" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" />

@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using incomeExpensTrckAVALONIA.Services;
+using incomeExpensTrckAVALONIA.Views;
+using System.Threading.Tasks;
 
 namespace incomeExpensTrckAVALONIA.ViewModels;
 
@@ -33,5 +35,14 @@ public partial class MainViewModel : ViewModelBase
         CurrentViewModel = new ExpensePageViewModel(expenseService);
         Title = "Exp. Page";
         IsVisible = true;
+    }
+
+    [RelayCommand]
+    public void NavToAddExpense()
+    {
+        CurrentViewModel = new AddExpensePageViewModel();
+        Title = "Add an Expense";
+        IsVisible = false;
+
     }
 }

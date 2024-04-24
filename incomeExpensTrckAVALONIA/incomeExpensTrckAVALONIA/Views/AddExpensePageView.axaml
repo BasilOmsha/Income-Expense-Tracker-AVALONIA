@@ -1,0 +1,95 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:incomeExpensTrckAVALONIA.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="incomeExpensTrckAVALONIA.Views.AddExpensePageView"
+			 x:DataType="vm:AddExpensePageViewModel">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:AddExpensePageViewModel />
+	</Design.DataContext>
+	<!-- When doing constrcture Injection and using the below code, the app doesn't navigate to the AddExpensePageView -->
+	<!--<RefreshContainer PullDirection="TopToBottom"
+					   HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+					  RefreshRequested="RefreshContainerPage_RefreshRequested">-->
+		<!--<ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center">-->
+			<StackPanel Margin="20">
+				<TextBlock Text="Add Your New Expense" Margin="0,5,0,30" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
+
+				<Grid ColumnDefinitions="Auto,Auto,Auto" HorizontalAlignment="Center" Margin="0,10,0,30">
+					<Grid RowDefinitions="Auto,Auto" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="0">
+						<TextBlock Text="Day" VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Center"/>
+						<ComboBox Margin="5,0,5,0" HorizontalContentAlignment="Center" x:Name="dayPicker"  Grid.Row="1" ItemsSource="{Binding DaysList}" BorderThickness="0" SelectedItem="{Binding Day}"/>
+					</Grid>
+					<Grid RowDefinitions="Auto,Auto" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="1">
+						<TextBlock Text="Month" VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Center"/>
+						<!--ItemSource is not mentioned in the combobox documentation in avalonia website. however, it is needed when binding the content to an abservable list-->
+						<ComboBox Margin="5,0,5,0" HorizontalContentAlignment="Center" x:Name="monthPicker" Grid.Row="1" ItemsSource="{Binding MonthsList}" BorderThickness="0" SelectedItem="{Binding Month}" />
+					</Grid>
+					<Grid RowDefinitions="Auto,Auto" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="2">
+						<TextBlock Text="Year" VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Center"/>
+						<ComboBox Margin="5,0,5,0" HorizontalContentAlignment="Center" x:Name="yearPicker" Grid.Row="1" ItemsSource="{Binding YearsList}" BorderThickness="0" SelectedItem="{Binding Year}" />
+					</Grid>
+				</Grid>
+				<Grid ColumnDefinitions="100,*"  Margin="0,0,0,30">
+					<TextBlock Text="Amount" VerticalAlignment="Center" HorizontalAlignment ="Stretch"/>
+					<!--<NumericUpDown Watermark="Amount" Value="{Binding Amount}" BorderThickness="0" Grid.Column="1" FormatString="N0" ParsingNumberStyle="Integer" />-->
+					<TextBox Watermark="Amount" Text="{Binding Amount}"  Grid.Column="1" BorderThickness="0" />
+				</Grid>
+				<Grid ColumnDefinitions="100,*" Margin="0,0,0,30">
+					<TextBlock Text="Catagory" VerticalAlignment="Center"/>
+					<ComboBox x:Name="catagoryPicker" SelectedItem="{Binding Category}" Grid.Column="1" BorderThickness="0" HorizontalAlignment ="Stretch">
+						<ComboBoxItem IsEnabled="False">Select a catagory</ComboBoxItem>
+						<ComboBoxItem>Groceries</ComboBoxItem>
+						<ComboBoxItem>Food and Drinks</ComboBoxItem>
+						<ComboBoxItem>Social Life</ComboBoxItem>
+						<ComboBoxItem>Pets</ComboBoxItem>
+						<ComboBoxItem>Transport</ComboBoxItem>
+						<ComboBoxItem>Culture</ComboBoxItem>
+						<ComboBoxItem>Household</ComboBoxItem>
+						<ComboBoxItem>Apreal</ComboBoxItem>
+						<ComboBoxItem>Beauty</ComboBoxItem>
+						<ComboBoxItem>Health</ComboBoxItem>
+						<ComboBoxItem>Education</ComboBoxItem>
+						<ComboBoxItem>Gifts</ComboBoxItem>
+						<ComboBoxItem>Other</ComboBoxItem>
+					</ComboBox>
+					<!--<ComboBox x:Name="categoryPicker" ItemsSource="{Binding Categories}" SelectedItem="{Binding Category}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch" />-->
+				</Grid>
+
+				<Grid  ColumnDefinitions="100,*" Margin="0,0,0,30">
+					<TextBlock Text="Account" VerticalAlignment="Center"/>
+					<ComboBox x:Name="accountPicker" SelectedItem="{Binding Account}" Grid.Column="1" BorderThickness="0" HorizontalAlignment ="Stretch">
+						<ComboBoxItem IsEnabled="False">Select an account</ComboBoxItem>
+						<ComboBoxItem>Cash</ComboBoxItem>
+						<ComboBoxItem>Bank Accounts</ComboBoxItem>
+						<ComboBoxItem>Card</ComboBoxItem>
+					</ComboBox>
+					<!--<ComboBox x:Name="accountPicker" ItemsSource="{Binding Accounts}" SelectedItem="{Binding Account}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch" />-->
+				</Grid>
+
+				<Grid ColumnDefinitions="100,*,30" Margin="0,0,0,30">
+					<TextBlock Text="Location" VerticalAlignment="Center" />
+					<TextBox Watermark="Location (Optional)" Grid.Column="1" Text="{Binding Location, Mode=TwoWay}" BorderThickness="0" />
+					<Button Grid.Column="2" Width="30" Height="30" Background="Transparent">
+						<Image Width="30" Height="30" Source="avares://incomeExpensTrckAVALONIA/Assets/pin_drop.png"></Image>
+					</Button>
+				</Grid>
+				<Grid ColumnDefinitions="100,*,30" Margin="0,0,0,30">
+					<TextBlock Text="Note" VerticalAlignment="Center"/>
+					<TextBox Watermark="Note" Grid.Column="1"  Text="{Binding Note}"  BorderThickness="0"/>
+				</Grid>
+				<Grid ColumnDefinitions="100,*,30" Margin="0,0,0,30">
+					<TextBlock Text="Description" VerticalAlignment="Center"/>
+					<TextBox AcceptsReturn="True" TextWrapping="Wrap" Watermark="Description" Grid.Column="1" Text="{Binding Description}" BorderThickness="0"/>
+				</Grid>
+				<Button  Content="Save" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold" Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4"/>
+				<Button  Content="Clear" Command="{Binding ClearFieldsCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold" Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4"/>
+			</StackPanel>
+		<!--</ScrollViewer>
+	</RefreshContainer>-->
+</UserControl>
