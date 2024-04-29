@@ -6,6 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="incomeExpensTrckAVALONIA.Views.AddExpensePageView"
 			 x:DataType="vm:AddExpensePageViewModel">
+			<!--NavigationBar.Header="Add Exp. Page">-->
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -42,34 +43,37 @@
 				</Grid>
 				<Grid ColumnDefinitions="100,*" Margin="0,0,0,30">
 					<TextBlock Text="Catagory" VerticalAlignment="Center"/>
-					<ComboBox x:Name="catagoryPicker" SelectedItem="{Binding Category}" Grid.Column="1" BorderThickness="0" HorizontalAlignment ="Stretch">
-						<ComboBoxItem IsEnabled="False">Select a catagory</ComboBoxItem>
-						<ComboBoxItem>Groceries</ComboBoxItem>
-						<ComboBoxItem>Food and Drinks</ComboBoxItem>
-						<ComboBoxItem>Social Life</ComboBoxItem>
-						<ComboBoxItem>Pets</ComboBoxItem>
-						<ComboBoxItem>Transport</ComboBoxItem>
-						<ComboBoxItem>Culture</ComboBoxItem>
-						<ComboBoxItem>Household</ComboBoxItem>
-						<ComboBoxItem>Apreal</ComboBoxItem>
-						<ComboBoxItem>Beauty</ComboBoxItem>
-						<ComboBoxItem>Health</ComboBoxItem>
-						<ComboBoxItem>Education</ComboBoxItem>
-						<ComboBoxItem>Gifts</ComboBoxItem>
-						<ComboBoxItem>Other</ComboBoxItem>
-					</ComboBox>
-					<!--<ComboBox x:Name="categoryPicker" ItemsSource="{Binding Categories}" SelectedItem="{Binding Category}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch" />-->
+					<!--<ComboBox x:Name="catagoryPicker" SelectedItem="{Binding Category}" Grid.Column="1" BorderThickness="0" HorizontalAlignment ="Stretch">-->
+					<!--<ComboBox x:Name="categoryPicker" SelectedIndex="{Binding Category}" SelectedItem="{Binding SelectedCategory}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch">-->
+						<!--<ComboBoxItem IsSelected="True" IsEnabled="False">Select a catagory</ComboBoxItem>-->
+						<!--<ComboBoxItem Content="Select a category" IsSelected="True" IsEnabled="False"/>
+						<ComboBoxItem Content="Groceries" />
+						<ComboBoxItem Content="Food and Drinks" />
+						<ComboBoxItem Content="Social Life" />
+						<ComboBoxItem Content="Pets" />
+						<ComboBoxItem Content="Transport" />
+						<ComboBoxItem Content="Culture" />
+						<ComboBoxItem Content="Household" />
+						<ComboBoxItem Content="Apreal" />
+						<ComboBoxItem Content="Beauty" />
+						<ComboBoxItem Content="Health" />
+						<ComboBoxItem Content="Education" />
+						<ComboBoxItem Content="Gifts" />
+						<ComboBoxItem Content="Other" />-->
+					<!--</ComboBox>-->
+					<ComboBox x:Name="categoryPicker" ItemsSource="{Binding CategoriesList}" SelectedItem="{Binding Category}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch" />
 				</Grid>
 
 				<Grid  ColumnDefinitions="100,*" Margin="0,0,0,30">
 					<TextBlock Text="Account" VerticalAlignment="Center"/>
-					<ComboBox x:Name="accountPicker" SelectedItem="{Binding Account}" Grid.Column="1" BorderThickness="0" HorizontalAlignment ="Stretch">
-						<ComboBoxItem IsEnabled="False">Select an account</ComboBoxItem>
-						<ComboBoxItem>Cash</ComboBoxItem>
-						<ComboBoxItem>Bank Accounts</ComboBoxItem>
-						<ComboBoxItem>Card</ComboBoxItem>
-					</ComboBox>
-					<!--<ComboBox x:Name="accountPicker" ItemsSource="{Binding Accounts}" SelectedItem="{Binding Account}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch" />-->
+					<!--<ComboBox x:Name="accountPicker" SelectedItem="{Binding Account}" Grid.Column="1" BorderThickness="0" HorizontalAlignment ="Stretch">-->
+					<!--<ComboBox x:Name="accountPicker" SelectedIndex="{Binding Account}" SelectedItem="{Binding SelectedAccount}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch">-->
+						<!--<ComboBoxItem Content="Select an account" IsSelected="True"  IsEnabled="False"/>
+						<ComboBoxItem Content="Cash" />
+						<ComboBoxItem Content="Bank Accounts" />
+						<ComboBoxItem Content="Card" />
+					</ComboBox>-->
+					<ComboBox x:Name="accountPicker" ItemsSource="{Binding AccountsList}" SelectedItem="{Binding Account}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch" />
 				</Grid>
 
 				<Grid ColumnDefinitions="100,*,30" Margin="0,0,0,30">
@@ -87,7 +91,7 @@
 					<TextBlock Text="Description" VerticalAlignment="Center"/>
 					<TextBox AcceptsReturn="True" TextWrapping="Wrap" Watermark="Description" Grid.Column="1" Text="{Binding Description}" BorderThickness="0"/>
 				</Grid>
-				<Button  Content="Save" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold" Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4"/>
+				<Button  Content="Save"  Command="{Binding AddExpenseCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold" Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4"/>
 				<Button  Content="Clear" Command="{Binding ClearFieldsCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold" Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4"/>
 			</StackPanel>
 		<!--</ScrollViewer>

@@ -21,6 +21,11 @@ namespace incomeExpensTrckAVALONIA.ViewModels
             GetExpenseList();
         }
 
+        [RelayCommand]
+        void RefreshExpenseList()
+        {
+            GetExpenseList();
+        }
 
         [RelayCommand]
         void GetExpenseList()

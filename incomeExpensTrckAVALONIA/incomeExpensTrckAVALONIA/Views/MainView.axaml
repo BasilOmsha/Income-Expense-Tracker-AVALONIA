@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:views="clr-namespace:incomeExpensTrckAVALONIA.Views"
              xmlns:vm="clr-namespace:incomeExpensTrckAVALONIA.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="incomeExpensTrckAVALONIA.Views.MainView"
@@ -12,26 +13,49 @@
 		<vm:MainViewModel />
 	</Design.DataContext>
 
+	<!-- This is the main view of the app. It contains custom controls that are used to navigate to different pages of the app.-->
 	<!--<UserControl.Styles>
 		<StyleInclude Source="./Styles/ExpensePageStyles.axaml" />
 	</UserControl.Styles>-->
 
 	<DockPanel>
-		<!-- Title Bar -->
+		 <!--Title Bar--> 
 		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="56" Background="#502bd4" >
 			<TextBlock  Text="{Binding Title}" FontWeight="Bold"  Margin="10,0,5,0" FontSize="15" VerticalAlignment="Center" Foreground="#fff"/>
-			<Rectangle Width="220" Height="0"/><!-- This acts as a spacer -->
+			<Rectangle Width="220" Height="0"/> <!--This acts as a spacer--> 
 			<Button Command="{Binding NavToAddExpenseCommand}" Content="Add" FontWeight="Bold" FontSize="15" Background="Transparent" Foreground="#fff"  Width="125"   Margin="10,0,5,0" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsVisible="{Binding IsVisible}"/>
 		</StackPanel>
 
-		<!-- Footer Nav -->
+		 <!--Footer Nav--> 
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="56" Background="#fff"  HorizontalAlignment="Center">
 			<Button Command="{Binding ShowExpensePageCommand}" Content="Expense Page" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="10,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" />
 			<Button Command="{Binding ShowHomePageCommand}" Content="Main Page" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" IsEnabled="True"/>
 			<Button Content="Exp. Location" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" />
 		</StackPanel>
-
 		<ContentControl Content="{Binding CurrentViewModel}"/>
-
 	</DockPanel>
+	<!--Custome ends here-->
+
+
+	<!--<ShellView Name="ShellViewMain"
+			  HorizontalAlignment="Stretch"
+			  VerticalAlignment="Stretch"
+			  DefaultSideMenuSize="250"
+			  DefaultRoute="/exp"
+			  SmallScreenSideMenuMode="Overlay"
+			  SmallScreenSideMenuBehave="Default"
+			  MediumScreenSideMenuMode="Inline"
+			  MediumScreenSideMenuBehave="Default"
+			  LargeScreenSideMenuMode="Inline"
+			  LargeScreenSideMenuBehave="Keep"
+			  DefaultPageTransition="{Binding CurrentTransition}">
+
+		<Host Path="main" Page="views:MainTabControl" Type="ReplaceRoot">
+			<Route Path="exp" Page="views:ExpensePageView" />
+			<Route Path="home" Page="views:MainPageView" />
+			--><!--<Route Path="map" Page="views:MapsPageView" />--><!--
+			<Route Path="setting" Page="views:SettingView" />
+		</Host>-->
+		
+	<!--</ShellView>-->
 </UserControl>

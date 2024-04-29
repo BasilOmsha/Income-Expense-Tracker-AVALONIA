@@ -7,19 +7,19 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="incomeExpensTrckAVALONIA.Views.ExpensePageView"
 			 x:DataType="vm:ExpensePageViewModel">
-
-
-	<Grid RowDefinitions="Auto,*">
+	<!--NavigationBar.Header="Exp. Page">-->
+	
+	<Grid RowDefinitions="Auto,*,Auto">
 		<ListBox ItemsSource="{Binding Expenses}" SelectionMode="Single" Grid.Row="1">
 			<ListBox.ItemTemplate>
 				<DataTemplate x:DataType="model:Expense">
 					<Border  Background="#fff" Padding="10" CornerRadius="5" BorderThickness="1" BorderBrush="#ececec">
 						<Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="*,*,*,*" Margin="0,0,0,5" Background="#fff" Height="220" >
-								<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0">
-									<TextBlock Text="{Binding Day, StringFormat='Date: {0}.'}" Margin="0,0,0,5" FontWeight="Bold"/>
-									<TextBlock Text="{Binding Month, StringFormat='{}{0}.'}" Margin="0,0,0,5" FontWeight="Bold"/>
-									<TextBlock Text="{Binding Year}"  Margin="0,0,0,5" FontWeight="Bold"/>
-								</StackPanel>
+							<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0">
+								<TextBlock Text="{Binding Day, StringFormat='Date: {0}.'}" Margin="0,0,0,5" FontWeight="Bold"/>
+								<TextBlock Text="{Binding Month, StringFormat='{}{0}.'}" Margin="0,0,0,5" FontWeight="Bold"/>
+								<TextBlock Text="{Binding Year}"  Margin="0,0,0,5" FontWeight="Bold"/>
+							</StackPanel>
 							<Rectangle Grid.Row="1" Grid.ColumnSpan="3" Height="1" Fill="#ececec" VerticalAlignment="Top" Margin="0,0"/>
 							<TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Category, StringFormat='Catagory: {0:C}'}" FontWeight="Bold"/>
 							<TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Account, StringFormat='Account: {0:C}'}" FontWeight="Bold"/>
@@ -30,5 +30,7 @@
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
+		<!--<Button Grid.Row="2" Command="{Binding RefreshExpenseListCommand}" Content="Refresh" FontWeight="Bold" FontSize="15" Background="Transparent" Foreground="#fff"  Width="125"   Margin="10,0,5,0" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>-->
+		<Button Grid.Row="2"  Content="Refresh" Command="{Binding RefreshExpenseListCommand}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold" Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4"/>
 	</Grid>
 </UserControl>

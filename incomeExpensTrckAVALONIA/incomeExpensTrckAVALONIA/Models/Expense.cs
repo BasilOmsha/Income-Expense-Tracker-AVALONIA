@@ -28,18 +28,18 @@ namespace incomeExpensTrckAVALONIA.Models
         public string Account { get; set; }
 
         [MapTo("location")]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [MapTo("latitude")]
-        public string Latitude { get; set; }
+        public string? Latitude { get; set; }
 
         [MapTo("longitude")]
-        public string Longitude { get; set; }
+        public string? Longitude { get; set; }
 
         [MapTo("note")]
         public string Note { get; set; }
 
         [MapTo("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }
