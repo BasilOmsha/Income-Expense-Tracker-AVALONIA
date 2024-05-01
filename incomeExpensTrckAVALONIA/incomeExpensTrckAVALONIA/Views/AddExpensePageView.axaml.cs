@@ -13,10 +13,10 @@ namespace incomeExpensTrckAVALONIA.Views
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+        //private void InitializeComponent()
+        //{
+        //    AvaloniaXamlLoader.Load(this);
+        //}
 
         // When doing constrcture Injection and using the below code, the app doesn't navigate to the AddExpensePageView
         //private void RefreshContainerPage_RefreshRequested(object? sender, RefreshRequestedEventArgs e)

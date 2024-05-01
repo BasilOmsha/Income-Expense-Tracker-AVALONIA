@@ -6,27 +6,30 @@
 			 xmlns:vm="clr-namespace:incomeExpensTrckAVALONIA.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="incomeExpensTrckAVALONIA.Views.ExpensePageView"
+			 x:Name="thisUserControl"
 			 x:DataType="vm:ExpensePageViewModel">
-	<!--NavigationBar.Header="Exp. Page">-->
-	
+
 	<Grid RowDefinitions="Auto,*,Auto">
 		<ListBox ItemsSource="{Binding Expenses}" SelectionMode="Single" Grid.Row="1">
 			<ListBox.ItemTemplate>
 				<DataTemplate x:DataType="model:Expense">
-					<Border  Background="#fff" Padding="10" CornerRadius="5" BorderThickness="1" BorderBrush="#ececec">
-						<Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="*,*,*,*" Margin="0,0,0,5" Background="#fff" Height="220" >
-							<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0">
-								<TextBlock Text="{Binding Day, StringFormat='Date: {0}.'}" Margin="0,0,0,5" FontWeight="Bold"/>
-								<TextBlock Text="{Binding Month, StringFormat='{}{0}.'}" Margin="0,0,0,5" FontWeight="Bold"/>
-								<TextBlock Text="{Binding Year}"  Margin="0,0,0,5" FontWeight="Bold"/>
-							</StackPanel>
-							<Rectangle Grid.Row="1" Grid.ColumnSpan="3" Height="1" Fill="#ececec" VerticalAlignment="Top" Margin="0,0"/>
-							<TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Category, StringFormat='Catagory: {0:C}'}" FontWeight="Bold"/>
-							<TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Account, StringFormat='Account: {0:C}'}" FontWeight="Bold"/>
-							<TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Amount, StringFormat='Amount: {0:C}'}" FontWeight="Bold"/>
-							<TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Note, StringFormat='Note: {0:C}'}" FontWeight="Bold"/>
-						</Grid>
-					</Border>
+					<Button   Background="#fff" Padding="10" CornerRadius="5" HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="#ececec" Click="ClickHandler" Tag="{Binding Id}">
+						<!--<Border  Background="#fff" Padding="10" CornerRadius="5" BorderThickness="1" BorderBrush="#ececec">-->
+							<Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="*,*,*,*,*" Margin="0,0,0,5" Background="#fff" Height="220" >
+								<!--<TextBlock Text="{Binding Id}" Margin="0,0,0,5" FontWeight="Bold"/>-->
+								<StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0">
+									<TextBlock Text="{Binding Day, StringFormat='Date: {0}.'}" Margin="0,0,0,5" FontWeight="Bold"/>
+									<TextBlock Text="{Binding Month, StringFormat='{}{0}.'}" Margin="0,0,0,5" FontWeight="Bold"/>
+									<TextBlock Text="{Binding Year}"  Margin="0,0,0,5" FontWeight="Bold"/>
+								</StackPanel>
+								<Rectangle Grid.Row="1" Grid.ColumnSpan="3" Height="1" Fill="#ececec" VerticalAlignment="Top" Margin="0,0"/>
+								<TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Category, StringFormat='Catagory: {0:C}'}" FontWeight="Bold"/>
+								<TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Account, StringFormat='Account: {0:C}'}" FontWeight="Bold"/>
+								<TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Amount, StringFormat='Amount: {0:C}'}" FontWeight="Bold"/>
+								<TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Note, StringFormat='Note: {0:C}'}" FontWeight="Bold"/>
+							</Grid>
+						<!--</Border>-->
+					</Button>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>

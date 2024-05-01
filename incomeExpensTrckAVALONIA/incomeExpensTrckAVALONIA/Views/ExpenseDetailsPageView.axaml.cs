@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace incomeExpensTrckAVALONIA.Views
 {
-    public partial class SettingView : UserControl
+    public partial class ExpenseDetailsPageView : UserControl
     {
-        public SettingView()
+        public ExpenseDetailsPageView()
         {
             InitializeComponent();
         }

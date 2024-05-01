@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using incomeExpensTrckAVALONIA.Services;
 using incomeExpensTrckAVALONIA.Views;
 using ReactiveUI;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace incomeExpensTrckAVALONIA.ViewModels;
@@ -29,17 +30,30 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     ViewModelBase currentViewModel;
 
+    [ObservableProperty]
+    public static string idToSelect;
+
     public ExpenseService expenseService = new();
 
     [ObservableProperty]
     bool isVisible;
+
+    [ObservableProperty]
+    bool isVisible2;
+
+    [ObservableProperty]
+    bool isVisible3;
+
     private MainViewModel mainViewModel;
 
     public MainViewModel()
     {
+        //CurrentViewModel = new ViewModelBase();
         //ShowHomePage();
         mainViewModel = this;
         ShowExpensePage();
+        //CurrentViewModel = new ExpensePageViewModel(expenseService, mainViewModel);
+        Debug.WriteLine("MainViewModel instantiated");
     }
 
     [RelayCommand]
@@ -48,14 +62,18 @@ public partial class MainViewModel : ViewModelBase
         CurrentViewModel = new MainPageViewModel();
         Title = "Main Page";
         IsVisible = false;
+        IsVisible2 = false;
+        IsVisible3 = false;
     }
 
     [RelayCommand]
     public void ShowExpensePage()
     {
-        CurrentViewModel = new ExpensePageViewModel(expenseService);
+        CurrentViewModel = new ExpensePageViewModel(expenseService, mainViewModel);
         Title = "Exp. Page";
         IsVisible = true;
+        IsVisible2 = true;
+        IsVisible3 = true;
     }
 
     [RelayCommand]
@@ -64,6 +82,38 @@ public partial class MainViewModel : ViewModelBase
         CurrentViewModel = new AddExpensePageViewModel(expenseService, mainViewModel);
         Title = "Add an Expense";
         IsVisible = false;
+        IsVisible2 = false;
+        IsVisible3 = false;
+
+    }
+
+    [RelayCommand]
+    public void GetId(string id)
+    {
+        Debug.WriteLine($"ID recieved: {id}");
+        IdToSelect = id;
+        Debug.WriteLine("IdToSelect set to " + IdToSelect);
+
+        Debug.WriteLine("Check if executed");
+    }
+
+    [RelayCommand]
+    public void NavToExpenseDetail2()
+    {
+        if (IdToSelect != null) // Ensure IdToSelect is not null
+        {
+            Debug.WriteLine($"Executing NavToExpenseDetail with ID: {IdToSelect}");
+            CurrentViewModel = new ExpenseDetailsPageViewModel(expenseService, IdToSelect);
+            Debug.WriteLine("CurrentViewModel set to ExpenseDetailsPageViewModel " + CurrentViewModel);
+            Title = "Expense Detail Page";
+            IsVisible = false;
+            IsVisible2 = false;
+            IsVisible3 = false;
+        }
+        else
+        {
+            Debug.WriteLine("IdToSelect is null");
+        }
 
     }
 }

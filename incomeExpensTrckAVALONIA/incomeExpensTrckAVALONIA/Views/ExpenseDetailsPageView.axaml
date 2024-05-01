@@ -1,0 +1,68 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:viewmodel="clr-namespace:incomeExpensTrckAVALONIA.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="incomeExpensTrckAVALONIA.Views.ExpenseDetailsPageView"
+			 x:DataType="viewmodel:ExpenseDetailsPageViewModel">
+	<StackPanel Margin="20">
+		<Button Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center"  Width="30" Height="30" Background="Transparent">
+			<Image Width="50" Height="50" Source="avares://incomeExpensTrckAVALONIA/Assets/cancel.png"></Image>
+		</Button>
+		<TextBlock Text="View And Edit Your Expenses" Margin="0,5,0,30" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
+
+		<Grid ColumnDefinitions="Auto,Auto,Auto" HorizontalAlignment="Center" Margin="0,10,0,30">
+			<Grid RowDefinitions="Auto,Auto" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="0">
+				<TextBlock Text="Day" VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Center"/>
+				<ComboBox Margin="5,0,5,0" HorizontalContentAlignment="Center" x:Name="dayPicker"  Grid.Row="1" ItemsSource="{Binding DaysList}" BorderThickness="0" SelectedItem="{Binding EditableExpense.Day}"/>
+			</Grid>
+			<Grid RowDefinitions="Auto,Auto" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="1">
+				<TextBlock Text="Month" VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Center"/>
+				<!--ItemSource is not mentioned in the combobox documentation in avalonia website. however, it is needed when binding the content to an abservable list-->
+				<ComboBox Margin="5,0,5,0" HorizontalContentAlignment="Center" x:Name="monthPicker" Grid.Row="1" ItemsSource="{Binding MonthsList}" BorderThickness="0" SelectedItem="{Binding EditableExpense.Month}" />
+			</Grid>
+			<Grid RowDefinitions="Auto,Auto" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Column="2">
+				<TextBlock Text="Year" VerticalAlignment="Center" Grid.Row="0" HorizontalAlignment="Center"/>
+				<ComboBox Margin="5,0,5,0" HorizontalContentAlignment="Center" x:Name="yearPicker" Grid.Row="1" ItemsSource="{Binding YearsList}" BorderThickness="0" SelectedItem="{Binding EditableExpense.Year}" />
+			</Grid>
+		</Grid>
+		<Grid ColumnDefinitions="100,*"  Margin="0,0,0,30">
+			<TextBlock Text="Amount" VerticalAlignment="Center" HorizontalAlignment ="Stretch"/>
+			<!--<NumericUpDown Watermark="Amount" Value="{Binding Amount}" BorderThickness="0" Grid.Column="1" FormatString="N0" ParsingNumberStyle="Integer" />-->
+			<TextBox Watermark="Amount" Text="{Binding EditableExpense.Amount}"  Grid.Column="1" BorderThickness="0" />
+		</Grid>
+		<Grid ColumnDefinitions="100,*" Margin="0,0,0,30">
+			<TextBlock Text="Catagory" VerticalAlignment="Center"/>
+			<ComboBox x:Name="categoryPicker" ItemsSource="{Binding CategoriesList}" SelectedItem="{Binding EditableExpense.Category}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch" />
+		</Grid>
+		<Grid  ColumnDefinitions="100,*" Margin="0,0,0,30">
+			<TextBlock Text="Account" VerticalAlignment="Center"/>
+			<ComboBox x:Name="accountPicker" ItemsSource="{Binding AccountsList}" SelectedItem="{Binding EditableExpense.Account}" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch" />
+		</Grid>
+		<Grid ColumnDefinitions="100,*,30" Margin="0,0,0,30">
+			<TextBlock Text="Location" VerticalAlignment="Center" />
+			<TextBox Watermark="Location (Optional)" Grid.Column="1" Text="{Binding EditableExpense.Location, Mode=TwoWay}" BorderThickness="0" />
+			<Button Grid.Column="2" Width="30" Height="30" Background="Transparent">
+				<Image Width="30" Height="30" Source="avares://incomeExpensTrckAVALONIA/Assets/pin_drop.png"></Image>
+			</Button>
+		</Grid>
+		<Grid ColumnDefinitions="100,*,30" Margin="0,0,0,30">
+			<TextBlock Text="Note" VerticalAlignment="Center"/>
+			<TextBox Watermark="Note" Grid.Column="1"  Text="{Binding EditableExpense.Note}"  BorderThickness="0"/>
+		</Grid>
+		<Grid ColumnDefinitions="100,*,30" Margin="0,0,0,30">
+			<TextBlock Text="Description" VerticalAlignment="Center"/>
+			<TextBox AcceptsReturn="True" TextWrapping="Wrap" Watermark="Description" Grid.Column="1" Text="{Binding EditableExpense.Description}" BorderThickness="0"/>
+		</Grid>
+
+		<!--<Button Grid.Row="7" Text="Update" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold"
+				Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ExpenseDetailsPageViewModel}}, 
+				Path=UpdateExpenseCommand }" CommandParameter="{Binding EditableExpense.Id}"/>
+
+		<Button Grid.Row="7" Text="Delete" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold"
+				Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ExpenseDetailsPageViewModel}}, 
+				Path=DeleteExpenseCommand }" CommandParameter="{Binding EditableExpense.Id}"/>-->
+
+	</StackPanel>
+</UserControl>

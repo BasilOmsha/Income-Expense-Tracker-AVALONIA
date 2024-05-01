@@ -68,6 +68,89 @@ namespace incomeExpensTrckAVALONIA.Services
             }
         }
 
+        public static Expense GetExpense(string id)
+        {
+
+            try
+            {
+                var realm = Realm.GetInstance();
+                if (realm == null) return null;
+                var expenseToShow = realm.All<Expense>().FirstOrDefault(d => d.Id == id);
+                Console.WriteLine($"Fetched {expenseToShow} expense from the database.");
+                if (expenseToShow != null)
+                {
+                    Console.WriteLine($"The one Expense: {expenseToShow.Day}");
+                }
+                return expenseToShow;
+            }
+            catch (Exception)
+            {
+                //StatusMessage = "Failed to retrieve expense data.";
+                Debug.WriteLine("Error", "Failed to retrieve expense data.", "Ok");
+            }
+            return null;
+        }
+
+        public string UpdateExpense(Expense editedExpense)
+        {
+            Init();
+            // open a thread-safe transaction
+            using var transaction = realm.BeginWrite();
+            try
+            {
+                var expenseToUpdate = realm.All<Expense>().FirstOrDefault(d => d.Id == editedExpense.Id);
+                if (expenseToUpdate != null)
+                {
+                    try
+                    {
+                        realm.WriteAsync(() =>
+                        {
+                            //expenseToUpdate.Date = editedExpense.Date;
+                            expenseToUpdate.Day = editedExpense.Day;
+                            expenseToUpdate.Month = editedExpense.Month;
+                            expenseToUpdate.Year = editedExpense.Year;
+                            expenseToUpdate.Amount = editedExpense.Amount;
+                            expenseToUpdate.Category = editedExpense.Category;
+                            expenseToUpdate.Account = editedExpense.Account;
+                            expenseToUpdate.Location = editedExpense.Location;
+                            expenseToUpdate.Note = editedExpense.Note;
+                            expenseToUpdate.Description = editedExpense.Description;
+                        });
+
+
+
+                        if (transaction.State == TransactionState.Running)
+                        {
+                            transaction.Commit();
+                            StatusMessage = "Expense updated successfully.";
+                            //return expenseToDelete.Id; // this is so that we can use the id to remove the item from the list
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        StatusMessage = "Update Failed";
+                        Console.WriteLine(ex.Message);
+                        // Something went wrong; roll back the transaction
+                        if (transaction.State != TransactionState.RolledBack &&
+                            transaction.State != TransactionState.Committed)
+                        {
+                            transaction.Rollback();
+                        }
+                    }
+
+                }
+                else
+                {
+                    StatusMessage = "Expense not found.";
+                }
+            }
+            catch (Exception)
+            {
+                StatusMessage = "Failed to update the expense.";
+            }
+            return string.Empty;
+        }
+
         //public List<Expense> GetExpenses()
         //{
         //    var expense1 = new Expense()
