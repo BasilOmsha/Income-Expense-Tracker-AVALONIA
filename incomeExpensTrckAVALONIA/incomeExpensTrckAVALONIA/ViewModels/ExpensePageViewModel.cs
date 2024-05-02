@@ -34,12 +34,12 @@ namespace incomeExpensTrckAVALONIA.ViewModels
             //mainViewModel.NavToExpenseDetail(id);
 
             Debug.WriteLine($"Navigating to Expense Detail Page with Id: {id}");
-            mainViewModel.GetId(id);
+            mainViewModel.NavToExpenseDetail(id);
 
         }
 
         [RelayCommand]
-        void RefreshExpenseList()
+        public void RefreshExpenseList()
         {
             GetExpenseList();
         }

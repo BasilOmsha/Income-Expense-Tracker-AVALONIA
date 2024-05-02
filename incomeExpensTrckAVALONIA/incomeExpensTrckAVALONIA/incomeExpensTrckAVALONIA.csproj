@@ -12,7 +12,10 @@
   
   <ItemGroup>
     <None Remove="Assets\cancel.png" />
+    <None Remove="Assets\home.png" />
+    <None Remove="Assets\map.png" />
     <None Remove="Assets\pin_drop.png" />
+    <None Remove="Assets\recipet.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\ExpenseDetailsView.axaml.cs">
+      <DependentUpon>ExpenseDetailsView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MainWindowView.axaml.cs">
       <DependentUpon>MainWindowView.axaml</DependentUpon>
     </Compile>

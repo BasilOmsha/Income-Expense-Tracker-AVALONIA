@@ -11,41 +11,54 @@ namespace incomeExpensTrckAVALONIA.Views
 {
     public partial class ExpensePageView : UserControl
     {
-        private readonly ExpensePageViewModel expensePageViewModel;
-        private readonly MainViewModel mainViewModel;
+        //private readonly ExpensePageViewModel expensePageViewModel;
+        //private readonly MainViewModel mainViewModel;
 
-        //public ExpensePageView(ExpensePageViewModel expensePageViewModel)
+        ////public ExpensePageView(ExpensePageViewModel expensePageViewModel)
         public ExpensePageView()
         {
             InitializeComponent();
-            mainViewModel = new MainViewModel();
+            //var expenseService = new ExpenseService(); // Ensure ExpenseService is properly instantiated
+            //mainViewModel = new MainViewModel();
+            //expensePageViewModel = new ExpensePageViewModel(expenseService, mainViewModel);
             //this.expensePageViewModel = expensePageViewModel;
-            var expenseService = new ExpenseService(); // Ensure ExpenseService is properly instantiated
             //DataContext = new ExpensePageViewModel(expenseService, mainViewModel);
-            expensePageViewModel = new ExpensePageViewModel(expenseService, mainViewModel);
-            DataContext = expensePageViewModel;
+            
+            //DataContext = expensePageViewModel;
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+        //private void InitializeComponent()
+        //{
+        //    AvaloniaXamlLoader.Load(this);
+        //}
 
-        private void ClickHandler(object sender, RoutedEventArgs e)
+        //private void ClickHandler(object sender, RoutedEventArgs e)
+        //{
+        //    Button button = sender as Button;
+        //    if (button != null)
+        //    {
+        //        string id = button.Tag as string; // Assuming Id is a string, adjust the type accordingly
+        //        if (expensePageViewModel != null)
+        //        {
+        //            expensePageViewModel.NavToAndGetExpenseDetail(id);
+        //        }
+        //        else
+        //        {
+        //            Debug.WriteLine("ExpensePageViewModel is not initialized.");
+        //        }
+        //    }
+        //}
+
+        private void RefreshContainerPage_RefreshRequested(object? sender, RefreshRequestedEventArgs e)
         {
-            Button button = sender as Button;
-            if (button != null)
-            {
-                string id = button.Tag as string; // Assuming Id is a string, adjust the type accordingly
-                if (expensePageViewModel != null)
-                {
-                    expensePageViewModel.NavToAndGetExpenseDetail(id);
-                }
-                else
-                {
-                    Debug.WriteLine("ExpensePageViewModel is not initialized.");
-                }
-            }
+            // Retrieve a deferral object.
+            var deferral = e.GetDeferral();
+            ExpensePageViewModel vm = this.DataContext as ExpensePageViewModel;
+            // Refresh List Box Items
+            vm.RefreshExpenseList();
+            Debug.WriteLine("Refresh Requested");
+            // Notify the Refresh Container that the refresh is complete.
+            deferral.Complete();
         }
 
     }

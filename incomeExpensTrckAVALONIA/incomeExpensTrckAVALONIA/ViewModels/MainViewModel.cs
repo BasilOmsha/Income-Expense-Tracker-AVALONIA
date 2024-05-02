@@ -30,19 +30,11 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     ViewModelBase currentViewModel;
 
-    [ObservableProperty]
-    public static string idToSelect;
-
     public ExpenseService expenseService = new();
 
     [ObservableProperty]
     bool isVisible;
 
-    [ObservableProperty]
-    bool isVisible2;
-
-    [ObservableProperty]
-    bool isVisible3;
 
     private MainViewModel mainViewModel;
 
@@ -62,8 +54,6 @@ public partial class MainViewModel : ViewModelBase
         CurrentViewModel = new MainPageViewModel();
         Title = "Main Page";
         IsVisible = false;
-        IsVisible2 = false;
-        IsVisible3 = false;
     }
 
     [RelayCommand]
@@ -72,8 +62,6 @@ public partial class MainViewModel : ViewModelBase
         CurrentViewModel = new ExpensePageViewModel(expenseService, mainViewModel);
         Title = "Exp. Page";
         IsVisible = true;
-        IsVisible2 = true;
-        IsVisible3 = true;
     }
 
     [RelayCommand]
@@ -82,38 +70,17 @@ public partial class MainViewModel : ViewModelBase
         CurrentViewModel = new AddExpensePageViewModel(expenseService, mainViewModel);
         Title = "Add an Expense";
         IsVisible = false;
-        IsVisible2 = false;
-        IsVisible3 = false;
+
 
     }
 
     [RelayCommand]
-    public void GetId(string id)
+    public void NavToExpenseDetail(string id)
     {
-        Debug.WriteLine($"ID recieved: {id}");
-        IdToSelect = id;
-        Debug.WriteLine("IdToSelect set to " + IdToSelect);
-
-        Debug.WriteLine("Check if executed");
-    }
-
-    [RelayCommand]
-    public void NavToExpenseDetail2()
-    {
-        if (IdToSelect != null) // Ensure IdToSelect is not null
-        {
-            Debug.WriteLine($"Executing NavToExpenseDetail with ID: {IdToSelect}");
-            CurrentViewModel = new ExpenseDetailsPageViewModel(expenseService, IdToSelect);
-            Debug.WriteLine("CurrentViewModel set to ExpenseDetailsPageViewModel " + CurrentViewModel);
-            Title = "Expense Detail Page";
-            IsVisible = false;
-            IsVisible2 = false;
-            IsVisible3 = false;
-        }
-        else
-        {
-            Debug.WriteLine("IdToSelect is null");
-        }
-
+        //Debug.WriteLine($"Executing NavToExpenseDetail with ID: {id}");
+        CurrentViewModel = new ExpenseDetailsViewModel(expenseService, id, mainViewModel);
+        //Debug.WriteLine("CurrentViewModel set to ExpenseDetailsPageViewModel " + CurrentViewModel);
+        Title = "Expense Details";
+        IsVisible = false;
     }
 }

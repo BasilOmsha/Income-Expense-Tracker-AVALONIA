@@ -19,13 +19,13 @@ namespace incomeExpensTrckAVALONIA
             collection.AddTransient<MainPageViewModel>();
             collection.AddSingleton<ExpensePageViewModel>(); // Singleton means that a single instance of the service is created and shared. Meaning that the same instance is used by all consumers.
             collection.AddSingleton<AddExpensePageViewModel>(); // Transient means that a new instance of the service is created each time it is requested.
-            collection.AddTransient<ExpenseDetailsPageViewModel>();
+            collection.AddTransient<ExpenseDetailsViewModel>();
 
             collection.AddSingleton<MainView>();
             collection.AddTransient<MainPageView>();
             collection.AddSingleton<ExpensePageView>();
             collection.AddSingleton<AddExpensePageView>();
-            collection.AddTransient<ExpenseDetailsPageView>();
+            collection.AddTransient<ExpenseDetailsView>();
 
             collection.AddTransient<ExpenseService>();
 

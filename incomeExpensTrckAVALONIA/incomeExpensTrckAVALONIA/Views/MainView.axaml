@@ -22,25 +22,33 @@
 		<!--Title Bar-->
 		<StackPanel DockPanel.Dock="Top" Orientation="Vertical" Height="76" Background="#fff">
 			<StackPanel  Orientation="Horizontal" Height="56" Background="#502bd4" >
-				<TextBlock  Text="{Binding Title}" FontWeight="Bold"  Margin="5,0,5,0" FontSize="15" VerticalAlignment="Center" Foreground="#fff"/>
-				<Rectangle Width="65" Height="0"/>
+				<TextBlock  Text="{Binding Title}" FontWeight="Bold"  Margin="10,0,5,0" FontSize="15" VerticalAlignment="Center" Foreground="#fff"/>
+				<Rectangle Width="220" Height="0"/>
 				<!--This acts as a spacer-->
-				<Button Command="{Binding NavToExpenseDetail2Command}" Content="Details Page" FontWeight="Bold" FontSize="15" Background="Transparent" Foreground="#fff"  Width="120"   Margin="5,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsVisible="{Binding IsVisible2}" />
-				<Rectangle Width="25" Height="0"/>
-				<!--This acts as a spacer-->
-				<Button Command="{Binding NavToAddExpenseCommand}" Content="Add" FontWeight="Bold" FontSize="15" Background="Transparent" Foreground="#fff"  Width="120"   Margin="5,0,5,0" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsVisible="{Binding IsVisible}"/>
+				<Button Command="{Binding NavToAddExpenseCommand}" Content="Add" FontWeight="Bold" FontSize="15" Background="Transparent" Foreground="#fff"  Width="120"   Margin="10,0,5,0" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsVisible="{Binding IsVisible}"/>
 			</StackPanel>
-			<WrapPanel Orientation="Horizontal" Height="20" Background="#fff">
-				<TextBlock Text="Select and expense then press the expense page button above to navigate to the details page." FontWeight="Bold" FontSize="15" Foreground="#000" Margin="5,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center"  IsVisible="{Binding IsVisible3}" />
-				</WrapPanel>
-			<!--<TextBlock HorizontalAlignment="Stretch" Text="Select and expense then press the expense page button above to navigate to the details page." />-->
 		</StackPanel>
-
+	
 		<!--Footer Nav-->
 		<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Height="56" Background="#fff"  HorizontalAlignment="Center">
-			<Button Command="{Binding ShowExpensePageCommand}" Content="Expense Page" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="10,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" />
-			<Button Command="{Binding ShowHomePageCommand}" Content="Main Page" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" IsEnabled="True"/>
-			<Button  Content="Exp. Location" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" />
+			<Button Command="{Binding ShowExpensePageCommand}" Content="Expense Page" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="10,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" >
+				<StackPanel Orientation="Vertical">
+					<Image Width="25" Height="25" Source="avares://incomeExpensTrckAVALONIA/Assets/recipet.png" />
+					<TextBlock Text="Expense Page" FontWeight="Bold"/>
+				</StackPanel>
+			</Button>
+			<Button Command="{Binding ShowHomePageCommand}" Content="Main Page" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" IsEnabled="False">
+				<StackPanel Orientation="Vertical">
+					<Image Width="25" Height="25" Source="avares://incomeExpensTrckAVALONIA/Assets/home.png" />
+					<TextBlock Text="Main Page" FontWeight="Bold"/>
+				</StackPanel>
+			</Button>
+			<Button  Content="Exp. Location" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" >
+				<StackPanel Orientation="Vertical">
+					<Image Width="25" Height="25" Source="avares://incomeExpensTrckAVALONIA/Assets/map.png" />
+					<TextBlock Text="Exp. Location" FontWeight="Bold"/>
+				</StackPanel>
+			</Button>
 			<!--<Button Command="{Binding NavToExpenseDetailCommand}" Content="Details Page" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,5,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" IsEnabled="True" IsVisible="{Binding IsVisible2}" />-->
 		</StackPanel>
 		<ContentControl Content="{Binding CurrentViewModel}"/>

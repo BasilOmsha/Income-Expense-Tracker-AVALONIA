@@ -13,9 +13,10 @@ using System.Threading.Tasks;
 
 namespace incomeExpensTrckAVALONIA.ViewModels
 {
-    public partial class ExpenseDetailsPageViewModel : ViewModelBase
+    public partial class ExpenseDetailsViewModel : ViewModelBase
     {
         private readonly ExpenseService expenseService;
+        private readonly MainViewModel mainViewModel;
 
         public ObservableCollection<string> YearsList { get; private set; }
         public ObservableCollection<string> MonthsList { get; private set; }
@@ -23,7 +24,7 @@ namespace incomeExpensTrckAVALONIA.ViewModels
         public ObservableCollection<string> CategoriesList { get; private set; }
         public ObservableCollection<string> AccountsList { get; private set; }
 
-        public ExpenseDetailsPageViewModel(ExpenseService expenseService, string selectedId)
+        public ExpenseDetailsViewModel(ExpenseService expenseService, string selectedId, MainViewModel mainViewModel)
         {
             Title = "Add Expense";
 
@@ -57,6 +58,7 @@ namespace incomeExpensTrckAVALONIA.ViewModels
             this.expenseService = expenseService;
 
             Id = selectedId;
+            this.mainViewModel = mainViewModel;
             LoadExpense();
         }
 
@@ -65,6 +67,12 @@ namespace incomeExpensTrckAVALONIA.ViewModels
 
         [ObservableProperty]
         string id;
+
+        [RelayCommand]
+        void Cancel()
+        {
+            mainViewModel.ShowExpensePage();
+        }
 
         public void LoadExpense()
         {
