@@ -108,6 +108,11 @@ namespace incomeExpensTrckAVALONIA.ViewModels
         [ObservableProperty]
         string description;
 
+        [RelayCommand]
+        void NavToMap()
+        {
+            //await Shell.Current.GoToAsync(nameof(MapModalView));
+        }
 
         [RelayCommand]
         void AddExpense()
