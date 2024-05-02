@@ -93,7 +93,24 @@ namespace incomeExpensTrckAVALONIA.ViewModels
         }
 
         [RelayCommand]
-        void UpdateExpense(string id)
+        public void DeleteExpense(string id)
+        {
+            if (id == string.Empty)
+            {
+                Debug.WriteLine("Error", "Try again", "Ok");
+                return;
+            }
+
+            //var confirm = await Shell.Current.DisplayAlert("Warning", "Are you sure you want to delete this expense?", "Yes", "No");
+            //if (!confirm) return;
+            Debug.WriteLine($"Deleting expense with ID: {id}");
+            expenseService.DeleteExpense(id);
+            Debug.WriteLine("Info", expenseService.StatusMessage, "Ok");
+            mainViewModel.ShowExpensePage();
+        }
+
+        [RelayCommand]
+        public void UpdateExpense(string id)
         {
             if (id == string.Empty)
             {
@@ -107,6 +124,7 @@ namespace incomeExpensTrckAVALONIA.ViewModels
             expenseService.UpdateExpense(EditableExpense);
             Debug.WriteLine("Info", expenseService.StatusMessage, "Ok");
             //await Shell.Current.GoToAsync("..");
+            mainViewModel.ShowExpensePage();
         }
 
         private Expense CloneExpense(Expense originalExpense)

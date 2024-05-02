@@ -151,6 +151,55 @@ namespace incomeExpensTrckAVALONIA.Services
             return string.Empty;
         }
 
+        public string DeleteExpense(string id)
+        {
+            Init();
+            // open a thread-safe transaction
+            using var transaction = realm.BeginWrite();
+            try
+            {
+                var expenseToDelete = realm.All<Expense>().FirstOrDefault(d => d.Id == id);
+                if (expenseToDelete != null)
+                {
+                    try
+                    {
+
+                        realm.Remove(expenseToDelete);
+
+
+
+                        if (transaction.State == TransactionState.Running) // check if the transaction is still running.
+                        {
+                            transaction.Commit(); // commit the transaction. Meaning the changes are saved to the database.
+                            StatusMessage = "Expense deleted successfully.";
+                            //return expenseToDelete.Id; // this is so that we can use the id to remove the item from the list
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        StatusMessage = "Deletion Failed";
+                        Console.WriteLine(ex.Message);
+                        // Something went wrong; roll back the transaction
+                        if (transaction.State != TransactionState.RolledBack &&
+                            transaction.State != TransactionState.Committed)
+                        {
+                            transaction.Rollback();
+                        }
+                    }
+
+                }
+                else
+                {
+                    StatusMessage = "Expense not found.";
+                }
+            }
+            catch (Exception)
+            {
+                StatusMessage = "Failed to delete expense.";
+            }
+            return string.Empty;
+        }
+
         //public List<Expense> GetExpenses()
         //{
         //    var expense1 = new Expense()
