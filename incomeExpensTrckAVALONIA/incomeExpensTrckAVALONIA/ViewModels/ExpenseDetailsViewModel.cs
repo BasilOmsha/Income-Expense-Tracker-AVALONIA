@@ -93,11 +93,11 @@ namespace incomeExpensTrckAVALONIA.ViewModels
         }
 
         [RelayCommand]
-        public void DeleteExpense(string id)
+        void DeleteExpense(string id)
         {
-            if (id == string.Empty)
+            if (id == string.Empty || id != Id)
             {
-                Debug.WriteLine("Error", "Try again", "Ok");
+                Debug.WriteLine("Error Try again");
                 return;
             }
 
@@ -110,9 +110,9 @@ namespace incomeExpensTrckAVALONIA.ViewModels
         }
 
         [RelayCommand]
-        public void UpdateExpense(string id)
+        void UpdateExpense(string id)
         {
-            if (id == string.Empty)
+            if (id == string.Empty || id != Id)
             {
                 Debug.WriteLine("Error", "Try again", "Ok");
                 return;
@@ -144,6 +144,12 @@ namespace incomeExpensTrckAVALONIA.ViewModels
                 Note = originalExpense.Note,
                 Description = originalExpense.Description,
             };
+        }
+
+        [RelayCommand]
+        void Refresh()
+        {
+            LoadExpense();
         }
     }
 }

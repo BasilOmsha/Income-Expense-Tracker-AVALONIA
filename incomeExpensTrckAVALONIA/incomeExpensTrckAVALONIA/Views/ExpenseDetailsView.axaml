@@ -5,12 +5,10 @@
 			 xmlns:viewmodel="clr-namespace:incomeExpensTrckAVALONIA.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="incomeExpensTrckAVALONIA.Views.ExpenseDetailsView"
-			 x:Name="DetailsControl"
-			 x:CompileBindings="True"
 			 x:DataType="viewmodel:ExpenseDetailsViewModel">
 	<StackPanel Margin="20">
 		<Button Command="{Binding CancelCommand}" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center"  Width="30" Height="30" Background="Transparent">
-			<Image Width="30" Height="30" Source="avares://incomeExpensTrckAVALONIA/Assets/cancel.png"></Image>
+			<Image Width="35" Height="35" Source="avares://incomeExpensTrckAVALONIA/Assets/cancel.png"></Image>
 		</Button>
 		<TextBlock Text="View And Edit Your Expenses" Margin="0,15,0,30" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
 
@@ -58,17 +56,16 @@
 			<TextBox AcceptsReturn="True" TextWrapping="Wrap" Watermark="Description" Grid.Column="1" Text="{Binding EditableExpense.Description}" BorderThickness="0"/>
 		</Grid>
 
-		<Button Grid.Row="7" Content="Update" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold"
-				Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4" Command="{Binding #DetailsControl.((viewmodel:ExpenseDetailsViewModel)DataContext).UpdateExpense}" 
-				CommandParameter="{Binding EditableExpense.Id}"/>
+		<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+			<Button Content="Update" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="15" FontWeight="Bold"
+					Height="50" Width="100" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4" Command="{Binding UpdateExpenseCommand}" CommandParameter="{Binding EditableExpense.Id}"/>
 
-		<Button Grid.Row="7" Content="Delete" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold"
-				Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4" Command="{Binding #DetailsControl.((viewmodel:ExpenseDetailsViewModel)DataContext).DeleteExpenseCommand}"
-				CommandParameter="{Binding EditableExpense.Id}"/>
-		
-		<!--<Button Grid.Row="7" Content="Cancel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold"
-				Height="50" Width="200" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4" Command="{Binding CancelCommand}"/>-->
-		
+			<Button Content="Delete" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="15" FontWeight="Bold"
+					Height="50" Width="100" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4" Command="{Binding DeleteExpenseCommand}" CommandParameter="{Binding EditableExpense.Id}"/>
+
+			<Button Content="Refresh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="15" FontWeight="Bold"
+				Height="50" Width="100" CornerRadius="5" Margin="0,5,0,0" Foreground="#fff" Background="#502bd4" Command="{Binding RefreshCommand}"/>
+		</StackPanel>
 
 	</StackPanel>
 </UserControl>
