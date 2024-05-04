@@ -23,7 +23,7 @@ namespace incomeExpensTrckAVALONIA.ViewModels
 
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public AddExpensePageViewModel(ExpenseService expenseService, MainViewModel mainViewModel)
+        public AddExpensePageViewModel(ExpenseService expenseService, MainViewModel mainViewModel, double lastClickedLatitude, double lastClickedLongitude)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Title = "Add Expense";
@@ -61,6 +61,10 @@ namespace incomeExpensTrckAVALONIA.ViewModels
             Day = DateTime.Now.Day.ToString();
             Month = DateTime.Now.Month.ToString();
             Year = DateTime.Now.Year.ToString();
+
+            Longitude = lastClickedLongitude.ToString();
+            Latitude = lastClickedLatitude.ToString();
+            UpdateLocation();
         }
 
         [ObservableProperty]
@@ -108,10 +112,23 @@ namespace incomeExpensTrckAVALONIA.ViewModels
         [ObservableProperty]
         string description;
 
+        private void UpdateLocation()
+        {
+            if (!string.IsNullOrEmpty(Latitude) && !string.IsNullOrEmpty(Longitude))
+            {
+                Location = $"{Latitude}, {Longitude}";
+            }
+            else
+            {
+                Location = "";
+            }
+        }
+
         [RelayCommand]
         void NavToMap()
         {
             //await Shell.Current.GoToAsync(nameof(MapModalView));
+            mainViewModel.NavToMap();
         }
 
         [RelayCommand]

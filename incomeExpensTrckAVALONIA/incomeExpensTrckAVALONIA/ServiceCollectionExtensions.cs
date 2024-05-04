@@ -2,6 +2,7 @@
 using incomeExpensTrckAVALONIA.ViewModels;
 using incomeExpensTrckAVALONIA.Views;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Devices.Sensors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace incomeExpensTrckAVALONIA
             collection.AddTransient<ExpenseDetailsView>();
 
             collection.AddTransient<ExpenseService>();
-
+            collection.AddSingleton<IGeolocation>(Geolocation.Default);
         }
     }
 }

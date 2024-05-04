@@ -7,6 +7,10 @@ using Projektanker.Icons.Avalonia.FontAwesome;
 using Projektanker.Icons.Avalonia.MaterialDesign;
 using Projektanker.Icons.Avalonia;
 using AvaloniaInside.Shell;
+using Avalonia.Maui;
+using Mapsui.UI.Maui;
+using Microsoft.Maui.Hosting;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace incomeExpensTrckAVALONIA.Android;
 
@@ -29,6 +33,9 @@ public class MainActivity : AvaloniaMainActivity<App>
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseReactiveUI()
+            .UseMaui<incomeExpensTrckAVALONIA.Maui.MauiApplication>(this, b => b
+                .UseSkiaSharp(true)
+            )
             .UseShell();
     }
 }

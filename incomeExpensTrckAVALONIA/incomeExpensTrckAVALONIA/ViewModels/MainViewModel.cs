@@ -3,10 +3,8 @@ using AvaloniaInside.Shell.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using incomeExpensTrckAVALONIA.Services;
-using incomeExpensTrckAVALONIA.Views;
-using ReactiveUI;
 using System.Diagnostics;
-using System.Threading.Tasks;
+using Microsoft.Maui.Devices.Sensors;
 
 namespace incomeExpensTrckAVALONIA.ViewModels;
 
@@ -30,13 +28,22 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     ViewModelBase currentViewModel;
 
+    [ObservableProperty]
+    double lastClickedLatitude;
+
+    [ObservableProperty]
+    double lastClickedLongitude;
+
     public ExpenseService expenseService = new();
+
 
     [ObservableProperty]
     bool isVisible;
 
 
     private MainViewModel mainViewModel;
+
+    //private IGeolocation IGeolocation;
 
     public MainViewModel()
     {
@@ -67,7 +74,7 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     public void NavToAddExpense()
     {
-        CurrentViewModel = new AddExpensePageViewModel(expenseService, mainViewModel);
+        CurrentViewModel = new AddExpensePageViewModel(expenseService, mainViewModel, LastClickedLatitude, LastClickedLongitude);
         Title = "Add an Expense";
         IsVisible = false;
 
@@ -81,6 +88,14 @@ public partial class MainViewModel : ViewModelBase
         CurrentViewModel = new ExpenseDetailsViewModel(expenseService, id, mainViewModel);
         //Debug.WriteLine("CurrentViewModel set to ExpenseDetailsPageViewModel " + CurrentViewModel);
         Title = "Expense Details";
+        IsVisible = false;
+    }
+
+    [RelayCommand]
+    public void NavToMap()
+    {
+        CurrentViewModel = new SelectLocationViewModel(mainViewModel);
+        Title = "Select Location";
         IsVisible = false;
     }
 }
