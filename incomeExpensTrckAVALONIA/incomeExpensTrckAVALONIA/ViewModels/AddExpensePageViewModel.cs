@@ -26,7 +26,7 @@ namespace incomeExpensTrckAVALONIA.ViewModels
         public AddExpensePageViewModel(ExpenseService expenseService, MainViewModel mainViewModel, double lastClickedLatitude, double lastClickedLongitude)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
-            Title = "Add Expense";
+            Title = "Add Expense Avalonia";
 
             this.expenseService = expenseService;
             this.mainViewModel = mainViewModel;

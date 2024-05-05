@@ -45,7 +45,7 @@ public partial class MainViewModel : ViewModelBase
     public void ShowHomePage()
     {
         CurrentViewModel = new MainPageViewModel();
-        Title = "Main Page";
+        Title = "Main Page Avalonia";
         IsVisible = false;
     }
 
@@ -53,7 +53,7 @@ public partial class MainViewModel : ViewModelBase
     public void ShowExpensePage()
     {
         CurrentViewModel = new ExpensePageViewModel(expenseService, mainViewModel);
-        Title = "Exp. Page";
+        Title = "Exp. Page Avalonia";
         IsVisible = true;
     }
 
@@ -61,7 +61,7 @@ public partial class MainViewModel : ViewModelBase
     public void NavToAddExpense()
     {
         CurrentViewModel = new AddExpensePageViewModel(expenseService, mainViewModel, LastClickedLatitude, LastClickedLongitude);
-        Title = "Add an Expense";
+        Title = "Add an Expense Avalonia";
         IsVisible = false;
 
 
@@ -73,7 +73,7 @@ public partial class MainViewModel : ViewModelBase
         //Debug.WriteLine($"Executing NavToExpenseDetail with ID: {id}");
         CurrentViewModel = new ExpenseDetailsViewModel(expenseService, id, mainViewModel);
         //Debug.WriteLine("CurrentViewModel set to ExpenseDetailsPageViewModel " + CurrentViewModel);
-        Title = "Expense Details";
+        Title = "Expense Details Avalonia";
         IsVisible = false;
     }
 
@@ -81,7 +81,7 @@ public partial class MainViewModel : ViewModelBase
     public void NavToMap()
     {
         CurrentViewModel = new SelectLocationViewModel(mainViewModel);
-        Title = "Select Location";
+        Title = "Select Location Avalonia";
         IsVisible = false;
     }
 
@@ -89,7 +89,7 @@ public partial class MainViewModel : ViewModelBase
     public void NavToExpenseMap()
     {
         CurrentViewModel = new ShowLocationsViewModel();
-        Title = "Exp. Locations";
+        Title = "Exp. Locations Avalonia";
         IsVisible = false;
     }
 }
