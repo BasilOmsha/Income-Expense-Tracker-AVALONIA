@@ -86,7 +86,7 @@ namespace incomeExpensTrckAVALONIA.Views
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Widgets.Add(new ScaleBarWidget(map) { TextAlignment = Alignment.Center });
-            map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
+            map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40, BackColor = Color.White });
             map.Widgets.Add(new MapInfoWidget(map));
             map.Layers.Add(_myLocationLayer);
             map.Layers.Add(Layer);
