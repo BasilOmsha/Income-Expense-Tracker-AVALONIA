@@ -11,20 +11,6 @@ namespace incomeExpensTrckAVALONIA.ViewModels;
 public partial class MainViewModel : ViewModelBase
 {
 
-    //[ObservableProperty]
-    //IPageTransition currentTranstion = PlatformSetup.TransitionForPage;
-    //public string Greeting => "Welcome to Avalonia!";
-    //private IPageTransition _currentTransition = PlatformSetup.TransitionForPage;
-    //public IPageTransition CurrentTransition
-    //{
-    //    get => _currentTransition;
-    //    set
-    //    {
-    //        this.SetProperty(ref _currentTransition, value);
-    //        this.RaiseAndSetIfChanged(ref _currentTransition, value);
-    //    }
-    //}
-
     [ObservableProperty]
     ViewModelBase currentViewModel;
 
@@ -96,6 +82,14 @@ public partial class MainViewModel : ViewModelBase
     {
         CurrentViewModel = new SelectLocationViewModel(mainViewModel);
         Title = "Select Location";
+        IsVisible = false;
+    }
+
+    [RelayCommand]
+    public void NavToExpenseMap()
+    {
+        CurrentViewModel = new ShowLocationsViewModel();
+        Title = "Exp. Locations";
         IsVisible = false;
     }
 }

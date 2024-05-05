@@ -15,17 +15,20 @@ using Color = Mapsui.Styles.Color;
 using System.Collections.Generic;
 using Mapsui.Nts;
 using NetTopologySuite.Geometries;
+using incomeExpensTrckAVALONIA.Models;
 using System.Collections.ObjectModel;
-using incomeExpensTrckAVALONIA.ViewModels;
+using incomeExpensTrckAVALONIA.Services;
+using Microsoft.Maui.Controls;
+using System.Linq;
+using Avalonia.Interactivity;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using Mapsui.Widgets;
 
 namespace incomeExpensTrckAVALONIA.Views
 {
-    public partial class SelectLocationView : UserControl
+    public partial class ShowLocationsView : UserControl
     {
-
         private IGeolocation geolocation;
 
         private Location location;
@@ -33,11 +36,15 @@ namespace incomeExpensTrckAVALONIA.Views
         private MyLocationLayer? _myLocationLayer;
 
         GenericCollectionLayer<List<IFeature>> Layer = new GenericCollectionLayer<List<IFeature>>();
-        ObservableCollection<Tuple<double, double>> PinStored = new ObservableCollection<Tuple<double, double>>();
+        public ExpenseService expenseService { get; private set; } = new();
 
-        public SelectLocationView()
+        public ObservableCollection<Expense> ExpenseLocations { get; private set; } = new();
+
+
+        public ShowLocationsView()
         {
             InitializeComponent();
+            ExpenseLocations.Clear();
             MapInit();
         }
 
@@ -58,7 +65,7 @@ namespace incomeExpensTrckAVALONIA.Views
                     Timeout = TimeSpan.FromSeconds(30)
                 });
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Debug.WriteLine($" {e.Message}");
             }
@@ -70,7 +77,6 @@ namespace incomeExpensTrckAVALONIA.Views
             MapView.Map.Navigator.RotationLock = false;
             MapView.UnSnapRotationDegrees = 30;
             MapView.ReSnapRotationDegrees = 5;
-
 
             _myLocationLayer?.Dispose();
             _myLocationLayer = new MyLocationLayer(map)
@@ -85,10 +91,6 @@ namespace incomeExpensTrckAVALONIA.Views
             map.Layers.Add(_myLocationLayer);
             map.Layers.Add(Layer);
 
-            MPoint point = new MPoint(location.Longitude, location.Latitude);
-            Debug.WriteLine($"The current location {point.X} {point.Y}");
-            AddPin(point, Color.Blue);
-
             map.Navigator.ZoomToLevel(14);
             //var center = new MPoint(location.Longitude, location.Latitude);
             var center = new MPoint(24.478288503698295, 60.97635155698171); // This is the default location I set for the emulator as the location property is not working with the emulator.
@@ -98,85 +100,74 @@ namespace incomeExpensTrckAVALONIA.Views
 
             // OSM uses spherical mercator coordinates. So transform the lon lat coordinates to spherical mercator
             var sphericalMercatorCoordinate = SphericalMercator.FromLonLat(center.X, center.Y).ToMPoint();
-            // Set the center of the viewport to the coordinate. The UI will refresh automatically
-            // Additionally you might want to set the resolution, this could depend on your specific purpose
-
-            map.Home = n => n.CenterOnAndZoomTo(sphericalMercatorCoordinate, n.Resolutions[14]);
+            map.Home = n => n.CenterOnAndZoomTo(sphericalMercatorCoordinate, n.Resolutions[4]);
 
             _myLocationLayer.UpdateMyLocation(sphericalMercatorCoordinate, true);
 
+            GetExpenseLocations();
+
+
+            foreach (var expense in ExpenseLocations)
+            {
+                Debug.WriteLine($"Expense: {expense.Amount} {expense.Latitude} {expense.Longitude}");
+                var point = new MPoint(Convert.ToDouble(expense.Longitude), Convert.ToDouble(expense.Latitude));
+                //var point = new MPoint(Convert.ToDouble(expense.Latitude), Convert.ToDouble(expense.Longitude));
+                Debug.WriteLine($"ExpenseCoords: {point.X} {point.Y}");
+                map.Info += (s, e) =>
+                {
+                    AddPin(point, Color.Purple);
+                    Debug.WriteLine($"pinadded: {point.X} {point.Y}");
+                    Layer?.DataHasChanged();
+                };
+            };
             MapView.Map = map;
 
-            MapView.Info += OnMapClicked;
-
         }
-
-        public void OnMapClicked(object sender, MapInfoEventArgs e)
-        {
-
-            // Get the clicked position
-            var clickedPosition = e.MapInfo.WorldPosition;
-            Debug.WriteLine($"clickedPosition:  {clickedPosition.X} {clickedPosition.Y}");
-
-            SelectLocationViewModel vm = this.DataContext as SelectLocationViewModel;
-
-            vm.LastClickedLatitude = clickedPosition.Y;
-            vm.LastClickedLongitude = clickedPosition.X;
-
-            // Remove all existing pins
-            RemovePinsFromUI();
-
-            AddPin(clickedPosition, Color.Purple);
-
-            PinStored.Clear(); // Clear existing coordinates
-
-            // Add the coordinates to the PinStored collection as a tuple
-            PinStored.Add(Tuple.Create(clickedPosition.X, clickedPosition.Y));
-
-            // Print the coordinates
-            foreach (var coordinate in PinStored)
-            {
-                Debug.WriteLine($"ObjectList:   {coordinate.Item1} {coordinate.Item2}");
-            }
-            MapView.Refresh();
-        }
-
-        private void RemovePinsFromUI()
-        {
-            MapView.Map.Layers.Remove(Layer);
-            Layer = new GenericCollectionLayer<List<IFeature>>();
-            MapView.Refresh();
-        }
-
 
         private void AddPin(MPoint clickedPosition, Color color)
         {
             Map map = MapView.Map;
 
-            //var pinStyle = new SymbolStyle
-            //{
-            //    SymbolType = SymbolType.Ellipse,
-            //    Fill = new Mapsui.Styles.Brush(color), // Set the pin color
-            //    Outline = new Mapsui.Styles.Pen(color), // Set the outline color
-            //    SymbolScale = 0.7F // Adjust the scale if needed
-            //};
-
             Layer = new GenericCollectionLayer<List<IFeature>>
             {
                 Style = SymbolStyles.CreatePinStyle(color)
-                //Style = pinStyle
-
             };
             map.Layers.Add(Layer);
 
-            // Add a point to the layer using the Info position
             Layer?.Features.Add(new GeometryFeature
             {
                 Geometry = new Point(clickedPosition.X, clickedPosition.Y)
             });
 
-            // To notify the map that a redraw is needed.
             Layer?.DataHasChanged();
         }
+
+        public void GetExpenseLocations()
+        {
+            try
+            {
+                if (ExpenseLocations.Any()) ExpenseLocations.Clear();
+                var expenses = expenseService.GetExpenses();
+                foreach (var expense in expenses) ExpenseLocations.Add(expense);
+
+            }
+            catch (System.Exception ex)
+            {
+                Debug.WriteLine($"Unable to get expenses: {ex.Message}");
+                Console.WriteLine($"Unable to get expenses: {ex.Message}");
+                Shell.Current.DisplayAlert("Error", "Unable to get expenses", "Ok");
+            }
+            finally
+            {
+
+            }
+        }
+        public void ClickHandler(object sender, RoutedEventArgs args)
+        {
+
+            ExpenseLocations.Clear();
+            MapInit();
+        }
+
     }
 }

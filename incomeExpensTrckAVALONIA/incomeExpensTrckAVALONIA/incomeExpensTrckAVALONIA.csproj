@@ -51,4 +51,8 @@
 			<DependentUpon>MainWindowView.axaml</DependentUpon>
 		</Compile>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.21" />
+	</ItemGroup>
 </Project>

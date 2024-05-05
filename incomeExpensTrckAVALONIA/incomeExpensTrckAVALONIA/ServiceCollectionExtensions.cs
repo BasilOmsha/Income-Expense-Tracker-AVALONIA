@@ -3,11 +3,6 @@ using incomeExpensTrckAVALONIA.ViewModels;
 using incomeExpensTrckAVALONIA.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Devices.Sensors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace incomeExpensTrckAVALONIA
 {
@@ -21,15 +16,17 @@ namespace incomeExpensTrckAVALONIA
             collection.AddSingleton<ExpensePageViewModel>(); // Singleton means that a single instance of the service is created and shared. Meaning that the same instance is used by all consumers.
             collection.AddSingleton<AddExpensePageViewModel>(); // Transient means that a new instance of the service is created each time it is requested.
             collection.AddTransient<ExpenseDetailsViewModel>();
+            collection.AddSingleton<ShowLocationsViewModel>();
 
             collection.AddSingleton<MainView>();
             collection.AddTransient<MainPageView>();
             collection.AddSingleton<ExpensePageView>();
             collection.AddSingleton<AddExpensePageView>();
             collection.AddTransient<ExpenseDetailsView>();
+            collection.AddSingleton<ShowLocationsView>();
 
             collection.AddTransient<ExpenseService>();
-            collection.AddSingleton<IGeolocation>(Geolocation.Default);
+            //collection.AddSingleton<IGeolocation>(Geolocation.Default);
         }
     }
 }

@@ -43,7 +43,7 @@
 					<TextBlock Text="Main Page" FontWeight="Bold"/>
 				</StackPanel>
 			</Button>
-			<Button  Content="Exp. Location" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" >
+			<Button Command="{Binding NavToExpenseMapCommand}"  Content="Exp. Location" FontSize="13" Background="#fff" Foreground="#502bd4"  Width="125"   Margin="5,0,10,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" >
 				<StackPanel Orientation="Vertical">
 					<Image Width="25" Height="25" Source="avares://incomeExpensTrckAVALONIA/Assets/map.png" />
 					<TextBlock Text="Exp. Location" FontWeight="Bold"/>

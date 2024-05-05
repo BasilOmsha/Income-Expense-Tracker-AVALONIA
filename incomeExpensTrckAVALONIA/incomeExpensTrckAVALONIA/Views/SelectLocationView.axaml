@@ -21,7 +21,6 @@
 						   />-->
 		<mapsui:MapControl Grid.Row="0"
 					    x:Name="MapView"
-						   Content="MapView"
 						   />
 		<Button  Content="Confirm Location"  Grid.Row="1"
 				 Command="{Binding ConfirmLocationCommand}" HorizontalContentAlignment="Center" 
